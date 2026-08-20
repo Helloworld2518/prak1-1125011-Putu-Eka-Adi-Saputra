@@ -3,13 +3,96 @@
  */
 package prak1.putu.eka.adi.saputra;
 
+class Menu{
+    String name;
+    double price;
+    String category;
+    static int totalMenu = 0;
 
-public class App {
-    public String getGreeting() {
-        return "Hello Eka!";
+    public Menu(String name, double price, String category){
+        this.name = name;
+        this.price = price;
+        this.category = category;
+
+        System.out.println("Menu berhasil dibuat");
+        Menu.totalMenu++;
     }
 
+    void showMenu(){
+        System.out.println("Name: " + name);
+        System.out.println("Price: " + price);
+        System.out.println("Category: " + category);
+    }
+
+    double discount(double percentage){
+        return price - (price * percentage);
+    }
+
+    void changePrice(double newPrice){
+        price = newPrice;
+    }
+}
+
+class Order{
+    static int orderid = 1;
+    String customerName;
+    Menu menu;
+    int quantity;
+
+    public Order(String customerName, Menu menu, int quantity){
+        this.customerName = customerName;
+        this.quantity = quantity;
+        this.menu = menu;
+    }
+
+    double calculateTotal(){
+        double total = menu.price * quantity;
+        return total;
+    }
+
+    void showOrder(){
+        System.out.println("ID: " + orderid);
+        System.out.println("Nama Pelanggan: " + customerName);
+        System.out.println("Menu: " + menu.name);
+        System.out.println("Jumlah: " + quantity);
+        System.out.print("Total Bayar: " + calculateTotal());
+        orderid++;
+    }
+}
+
+
+public class App {
+    // public String getGreeting() {
+    //     return "Hello Eka!";
+    // }
+
+
+
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        // System.out.println(new App().getGreeting());
+
+        Menu Espresso = new Menu("Espresso", 20000, "Beverage");
+        Menu Croissant = new Menu("Croissant", 25000, "Food");
+        Menu Matcha = new Menu("Matcha", 22000, "Beverage");
+        Menu Sandwich = new Menu("Sandwich", 30000, "Food");
+        System.out.println("=== CAFE MENU ===");
+        Espresso.showMenu();
+        Croissant.showMenu();
+        Matcha.showMenu();
+        Sandwich.showMenu();
+        System.out.println("=== AFTER UPDATE ===");
+
+        System.out.println("Espresso");
+        System.out.println("Original Price: " + Espresso.price);
+        System.out.println("Discount 10%: " + Espresso.discount(0.1));
+        Croissant.changePrice(28000);
+        System.out.println("Croissant");
+        System.out.println("New Price: " + Croissant.price);
+        System.out.println("Total Menu: " + Menu.totalMenu);
+
+        System.out.println();
+
+        Order neworder = new Order("Key", Espresso, 2);
+        neworder.showOrder();
     }
 }
