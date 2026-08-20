@@ -6,7 +6,7 @@ package prak1.putu.eka.adi.saputra;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "Hello Eka!";
     }
 
     public static void main(String[] args) {
